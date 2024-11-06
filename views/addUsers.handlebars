@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add User</title>
+  <script>
+    // Basic client-side validation for email and mobile number
+    function validateForm() {
+      const email = document.getElementById("email").value;
+      const mobile = document.getElementById("mobile").value;
+
+      // Regex patterns
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const mobilePattern = /^[0-9]{10}$/;
+
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email.");
+        return false;
+      }
+      if (!mobilePattern.test(mobile)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <h2>Add User</h2>
+
+  <!-- Display validation errors from server -->
+  {{#if errors}}
+    <ul>
+      {{#each errors}}
+        <li>{{msg}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  <form action="/add-user" method="POST" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="mobile">Mobile:</label>
+    <input type="text" id="mobile" name="mobile" required><br><br>
+
+    <button type="submit">Add User</button>
+  </form>
+
+  <br>
+  <a href="/">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Task</title>
+</head>
+<body>
+  <h2>Add Task</h2>
+
+  <!-- Display any validation errors from the server -->
+  {{#if errors}}
+    <ul>
+      {{#each errors}}
+        <li>{{msg}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  <form action="/add-task" method="POST">
+    <label for="user">Select User:</label>
+    <select id="user" name="user_id" required>
+      <option value="">--Select User--</option>
+      {{#each users}}
+        <option value="{{this.id}}">{{this.name}} ({{this.email}})</option>
+      {{/each}}
+    </select><br><br>
+
+    <label for="task_name">Task Name:</label>
+    <input type="text" id="task_name" name="task_name" required><br><br>
+
+    <label for="task_type">Task Status:</label>
+    <select id="task_type" name="task_type" required>
+      <option value="Pending">Pending</option>
+      <option value="Done">Done</option>
+    </select><br><br>
+
+    <button type="submit">Add Task</button>
+  </form>
+
+  <br>
+  <a href="/">Back to Dashboard</a>
+</body>
+</html>
